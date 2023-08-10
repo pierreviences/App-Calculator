@@ -31,7 +31,14 @@ class MainActivity : AppCompatActivity() {
 
     }
     fun onDigitClick(view: View) {
-     
+        if(stateError){
+            binding.dataTv.text = (view as Button).text
+            stateError = false
+        }else {
+            binding.dataTv.append((view as Button).text)
+        }
+        lastNumeric = true
+        onEqual()
     }
     fun onOperatorClick(view: View) {}
     fun onBackClick(view: View) {}
