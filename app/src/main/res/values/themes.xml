@@ -6,4 +6,14 @@
     </style>
 
     <style name="Theme.Calculator" parent="Base.Theme.Calculator" />
+
+    <style name="digitButton" parent="commonButton">
+        <item name="background">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="commonButton" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">72dp</item>
+
+    </style>
 </resources>
