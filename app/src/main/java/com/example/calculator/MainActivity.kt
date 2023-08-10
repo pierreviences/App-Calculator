@@ -2,9 +2,13 @@ package com.example.calculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import com.example.calculator.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.Expression
+import net.objecthunter.exp4j.ExpressionBuilder
+import java.lang.ArithmeticException
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,14 +24,34 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
     }
 
-    fun onAllClearClick(view: View) {}
-    fun onEqualClick(view: View) {}
-    fun onDigitClick(view: View) {}
+    fun onAllClearClick(view: View) {
+
+    }
+    fun onEqualClick(view: View) {
+
+    }
+    fun onDigitClick(view: View) {
+     
+    }
     fun onOperatorClick(view: View) {}
     fun onBackClick(view: View) {}
     fun onClearClick(view: View) {}
 
-    fun OnEqual(){
+    fun onEqual(){
+        if(lastNumeric && !stateError){
+            val txt = binding.dataTv.text.toString()
+            expression = ExpressionBuilder(txt).build()
 
+            try {
+                val result = expression.evaluate()
+                binding.resultTv.visibility = View.VISIBLE
+                binding.resultTv.text = "=" + result.toString()
+            }catch (ex: ArithmeticException){
+                Log.e("Evaluate Error", ex.toString())
+                binding.resultTv.text = "Error"
+                stateError = true
+                lastNumeric = false
+            }
+        }
     }
 }
