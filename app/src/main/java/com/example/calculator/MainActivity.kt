@@ -9,6 +9,7 @@ import com.example.calculator.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.lang.ArithmeticException
+import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding.resultTv.visibility = View.GONE
     }
     fun onEqualClick(view: View) {
-
+        onEqual()
+        binding.dataTv.text = binding.resultTv.text.toString()
     }
     fun onDigitClick(view: View) {
         if(stateError){
@@ -45,9 +47,32 @@ class MainActivity : AppCompatActivity() {
         lastNumeric = true
         onEqual()
     }
-    fun onOperatorClick(view: View) {}
-    fun onBackClick(view: View) {}
-    fun onClearClick(view: View) {}
+    fun onOperatorClick(view: View) {
+        if(!stateError && lastNumeric){
+            binding.dataTv.append((view as Button).text)
+            lastDot = false
+            lastNumeric = false
+            onEqual()
+
+        }
+    }
+    fun onBackClick(view: View) {
+        binding.dataTv.text = binding.dataTv.text.toString().dropLast(1)
+        try{
+            val lastChar = binding.dataTv.text.toString().last()
+            if(lastChar.isDigit()){
+                onEqual()
+            }
+        }catch(e : Exception){
+            binding.resultTv.text = ""
+            binding.resultTv.visibility = View.GONE
+
+        }
+    }
+    fun onClearClick(view: View) {
+        binding.dataTv.text = ""
+        lastNumeric = false
+    }
 
     fun onEqual(){
         if(lastNumeric && !stateError){

@@ -10,7 +10,7 @@
         android:id="@+id/data_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="24 + 67"
+        android:text=""
         android:textColor="@color/black"
         android:textAlignment="viewEnd"
         android:layout_marginEnd="12dp"
@@ -27,7 +27,7 @@
         android:textAlignment="viewEnd"
         android:layout_marginEnd="12dp"
         android:textSize="28dp"
-        android:text="=2454"
+        android:text="="
         android:textColor="#626262"
         app:layout_constraintBottom_toTopOf="@+id/line"
         app:layout_constraintEnd_toEndOf="parent"
@@ -211,6 +211,8 @@
                android:text="="
                android:onClick="onEqualClick"
                style="@style/operatorbutton"
+               android:textColor="@color/white"
+               android:backgroundTint="@color/btnBackground2"
                android:id="@+id/btn_equal"
                />
 
