@@ -25,7 +25,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onAllClearClick(view: View) {
-
+        binding.dataTv.text = ""
+        binding.resultTv.text = ""
+        stateError = false
+        lastDot = false
+        lastNumeric = false
+        binding.resultTv.visibility = View.GONE
     }
     fun onEqualClick(view: View) {
 
