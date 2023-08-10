@@ -34,16 +34,148 @@
        app:layout_constraintEnd_toEndOf="parent"
        android:orientation="vertical">
        <LinearLayout
+           android:gravity="center"
            android:layout_width="match_parent"
            android:layout_height="match_parent"
            android:orientation="horizontal">
 
            <com.google.android.material.button.MaterialButton
-               android:layout_width="72dp"
-               android:layout_height="72dp"
-               app:cornerRadius="36dp"
-               android:backgroundTint="@color/white"
-               style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+               android:text="C"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:onClick="onDigitClick"
+               app:icon="@drawable/baseline_backspace_24"
+               app:iconTint="@color/btnBackground2"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="%"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="/"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="horizontal">
+
+           <com.google.android.material.button.MaterialButton
+               android:text="7"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="8"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="9"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="*"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="horizontal">
+
+           <com.google.android.material.button.MaterialButton
+               android:text="4"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="5"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="6"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="+"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="horizontal">
+
+           <com.google.android.material.button.MaterialButton
+               android:text="1"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="2"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="3"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="-"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+
+       </LinearLayout>
+
+       <LinearLayout
+           android:gravity="center"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="horizontal">
+
+           <com.google.android.material.button.MaterialButton
+               android:text="A"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="0"
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="."
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
+           <com.google.android.material.button.MaterialButton
+               android:text="="
+               android:onClick="onDigitClick"
+               style="@style/digitbutton"
+               />
 
        </LinearLayout>
 
