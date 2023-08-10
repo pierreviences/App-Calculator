@@ -8,17 +8,16 @@ import android.widget.Button
 import com.example.calculator.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
-import java.lang.ArithmeticException
 import java.lang.Exception
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    var lastNumeric = false
-    var stateError = false
-    var lastDot = false
-
+    private var lastNumeric = false
+    private var stateError = false
+    private var lastDot = false
     private lateinit var expression: Expression
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -26,6 +25,66 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onAllClearClick(view: View) {
+        clearInput()
+    }
+
+    fun onEqualClick(view: View) {
+        if (lastNumeric && !stateError) {
+            val inputText = binding.dataTv.text.toString()
+            expression = try {
+                ExpressionBuilder(inputText).build()
+            } catch (ex: Exception) {
+                handleExpressionError(ex)
+                return
+            }
+
+            try {
+                val result = expression.evaluate()
+                binding.resultTv.visibility = View.VISIBLE
+                binding.resultTv.text = "=$result"
+            } catch (ex: ArithmeticException) {
+                handleExpressionError(ex)
+            }
+        }
+    }
+
+    fun onDigitClick(view: View) {
+        if (stateError) {
+            clearInput()
+        }
+        val buttonText = (view as Button).text.toString()
+        binding.dataTv.append(buttonText)
+        lastNumeric = true
+    }
+
+    fun onOperatorClick(view: View) {
+        if (!stateError && lastNumeric) {
+            val buttonText = (view as Button).text.toString()
+            binding.dataTv.append(buttonText)
+            lastDot = false
+            lastNumeric = false
+        }
+    }
+
+    fun onBackClick(view: View) {
+        val currentInput = binding.dataTv.text.toString()
+        if (currentInput.isNotEmpty()) {
+            binding.dataTv.text = currentInput.dropLast(1)
+            if (currentInput.last().isDigit()) {
+                lastNumeric = true
+            }
+        }
+        if (binding.dataTv.text.isEmpty()) {
+            binding.resultTv.text = ""
+            binding.resultTv.visibility = View.GONE
+        }
+    }
+
+    fun onClearClick(view: View) {
+        clearInput()
+    }
+
+    private fun clearInput() {
         binding.dataTv.text = ""
         binding.resultTv.text = ""
         stateError = false
@@ -33,54 +92,11 @@ class MainActivity : AppCompatActivity() {
         lastNumeric = false
         binding.resultTv.visibility = View.GONE
     }
-    fun onEqualClick(view: View) {
-        if (lastNumeric && !stateError) {
-            val txt = binding.dataTv.text.toString()
-            expression = ExpressionBuilder(txt).build()
 
-            try {
-                val result = expression.evaluate()
-                binding.resultTv.visibility = View.VISIBLE
-                binding.resultTv.text = "=" + result.toString()
-            } catch (ex: ArithmeticException) {
-                Log.e("Evaluate Error", ex.toString())
-                binding.resultTv.text = "Error"
-                stateError = true
-                lastNumeric = false
-            }
-        }
-    }
-    fun onDigitClick(view: View) {
-        if (stateError) {
-            binding.dataTv.text = (view as Button).text
-            stateError = false
-        } else {
-            binding.dataTv.append((view as Button).text)
-        }
-        lastNumeric = true
-    }
-    fun onOperatorClick(view: View) {
-        if (!stateError && lastNumeric) {
-            binding.dataTv.append((view as Button).text)
-            lastDot = false
-            lastNumeric = false
-        }
-    }
-    fun onBackClick(view: View) {
-        binding.dataTv.text = binding.dataTv.text.toString().dropLast(1)
-        try{
-            val lastChar = binding.dataTv.text.toString().last()
-            
-        }catch(e : Exception){
-            binding.resultTv.text = ""
-            binding.resultTv.visibility = View.GONE
-
-        }
-    }
-    fun onClearClick(view: View) {
-        binding.dataTv.text = ""
+    private fun handleExpressionError(ex: Exception) {
+        Log.e("Evaluate Error", ex.toString())
+        binding.resultTv.text = "Error"
+        stateError = true
         lastNumeric = false
     }
-
-
 }
